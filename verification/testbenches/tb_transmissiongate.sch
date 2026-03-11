@@ -8,28 +8,33 @@ E {}
 N 150 90 240 90 {lab=avss1p8}
 N 70 -80 150 -80 {lab=avdd1p8}
 N 70 -130 70 -80 {lab=avdd1p8}
-N 0 -80 70 -80 {lab=avdd1p8}
 N 80 0 80 30 {lab=vout}
 N 280 -230 280 -200 {lab=avss1p8}
 N 380 -230 380 -200 {lab=avdd1p8}
-N 480 -230 480 -200 {lab=vb}
+N 480 -230 480 -200 {lab=in}
 N 280 -140 280 -110 {lab=GND}
 N 380 -140 380 -120 {lab=avss1p8}
 N 480 -140 480 -120 {lab=avss1p8}
-N 0 -80 0 -50 {lab=avdd1p8}
 N 150 -80 150 -30 {lab=avdd1p8}
 N 240 60 240 90 {lab=avss1p8}
-N -0 50 0 90 {lab=avss1p8}
-N -30 90 0 90 {lab=avss1p8}
 N 50 -0 80 0 {lab=vout}
 N 180 0 240 0 {lab=#net1}
 N 150 30 150 90 {lab=avss1p8}
 N 80 0 100 -0 {lab=vout}
-N 480 -80 480 -60 {lab=va}
+N 480 -80 480 -60 {lab=en}
 N 480 0 480 30 {lab=avss1p8}
-N 0 90 150 90 {lab=avss1p8}
-N -80 -10 -50 -10 {lab=va}
-N -80 10 -50 10 {lab=vb}
+N -40 -80 70 -80 {lab=avdd1p8}
+N -40 -80 -40 -40 {lab=avdd1p8}
+N -40 40 -40 90 {lab=avss1p8}
+N -40 90 150 90 {lab=avss1p8}
+N -50 90 -40 90 {lab=avss1p8}
+N 10 -60 10 -40 {lab=en}
+N -110 -0 -80 0 {lab=in}
+N -50 180 -20 180 {lab=en}
+N 60 180 110 180 {lab=noten}
+N 10 40 10 70 {lab=noten}
+N 30 120 30 150 {lab=avdd1p8}
+N 30 210 30 250 {lab=avss1p8}
 C {capa.sym} 240 30 0 0 {name=C1
 m=1
 value=1p
@@ -37,9 +42,7 @@ footprint=1206
 device="ceramic capacitor"}
 C {lab_pin.sym} 70 -130 0 0 {name=p1 sig_type=std_logic lab=avdd1p8
 }
-C {lab_pin.sym} -80 10 0 0 {name=p2 sig_type=std_logic lab=vb
-}
-C {lab_pin.sym} -30 90 0 0 {name=p3 sig_type=std_logic lab=avss1p8}
+C {lab_pin.sym} -50 90 0 0 {name=p3 sig_type=std_logic lab=avss1p8}
 C {lab_pin.sym} 80 30 0 0 {name=p4 sig_type=std_logic lab=vout
 }
 C {vsource.sym} 280 -170 0 0 {name=V4 value= DC\{vss\} savecurrent=false}
@@ -49,7 +52,7 @@ C {lab_pin.sym} 280 -230 0 0 {name=p5 sig_type=std_logic lab=avss1p8
 }
 C {lab_pin.sym} 380 -230 0 0 {name=p6 sig_type=std_logic lab=avdd1p8
 }
-C {lab_pin.sym} 480 -230 0 0 {name=p7 sig_type=std_logic lab=vb
+C {lab_pin.sym} 480 -230 0 0 {name=p7 sig_type=std_logic lab=in
 }
 C {lab_pin.sym} 480 -120 0 0 {name=p10 sig_type=std_logic lab=avss1p8
 }
@@ -69,7 +72,7 @@ value="
 .control
 tran 0.01u 100n
 setplot tran1
-plot v(va) v(vb) + 1.2 v(vout) + 2.4
+plot v(en) v(in) + 1.2 v(vout) + 2.4
 set filetype = ascii
 write dcsweep.raw
 .endc
@@ -77,12 +80,23 @@ write dcsweep.raw
 "}
 C {blocks/inverter/schematic/inverter.sym} 130 -10 0 0 {name=x2}
 C {vsource.sym} 480 -30 0 0 {name=V1 value="PULSE(\{vdd\} 0 0.0 1p 1p \{Tclk/2\} \{Tclk\}) DC 0 AC 0" savecurrent=false}
-C {lab_pin.sym} 480 -80 0 0 {name=p8 sig_type=std_logic lab=va
+C {lab_pin.sym} 480 -80 0 0 {name=p8 sig_type=std_logic lab=en
 }
 C {lab_pin.sym} 480 30 0 0 {name=p11 sig_type=std_logic lab=avss1p8
 }
-C {lab_pin.sym} -80 -10 0 0 {name=p12 sig_type=std_logic lab=va
-}
 C {lab_pin.sym} 380 -120 0 0 {name=p13 sig_type=std_logic lab=avss1p8
 }
-C {blocks/xorgate/schematic/xorgate.sym} -50 0 0 0 {name=x1}
+C {blocks/transmissiongate/schematic/transmissiongate.sym} 30 10 0 0 {name=x1}
+C {lab_pin.sym} 10 -60 2 0 {name=p9 sig_type=std_logic lab=en
+}
+C {lab_pin.sym} -110 0 0 0 {name=p15 sig_type=std_logic lab=in}
+C {blocks/inverter/schematic/inverter.sym} 10 170 0 0 {name=x3}
+C {lab_pin.sym} -50 180 0 0 {name=p2 sig_type=std_logic lab=en
+}
+C {lab_pin.sym} 10 70 2 0 {name=p12 sig_type=std_logic lab=noten
+}
+C {lab_pin.sym} 110 180 2 0 {name=p14 sig_type=std_logic lab=noten
+}
+C {lab_pin.sym} 30 120 0 0 {name=p16 sig_type=std_logic lab=avdd1p8
+}
+C {lab_pin.sym} 30 250 0 0 {name=p17 sig_type=std_logic lab=avss1p8}
