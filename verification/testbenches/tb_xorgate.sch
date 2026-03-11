@@ -25,11 +25,11 @@ N 50 -0 80 0 {lab=vout}
 N 180 0 240 0 {lab=#net1}
 N 150 30 150 90 {lab=avss1p8}
 N 80 0 100 -0 {lab=vout}
-N -80 -10 -40 -10 {lab=va}
 N 480 -80 480 -60 {lab=va}
 N 480 0 480 30 {lab=avss1p8}
 N 0 90 150 90 {lab=avss1p8}
-N -80 10 -40 10 {lab=vb}
+N -80 -10 -50 -10 {lab=va}
+N -80 10 -50 10 {lab=vb}
 C {capa.sym} 240 30 0 0 {name=C1
 m=1
 value=1p
@@ -40,7 +40,7 @@ C {lab_pin.sym} 70 -130 0 0 {name=p1 sig_type=std_logic lab=avdd1p8
 C {lab_pin.sym} -80 10 0 0 {name=p2 sig_type=std_logic lab=vb
 }
 C {lab_pin.sym} -30 90 0 0 {name=p3 sig_type=std_logic lab=avss1p8}
-C {lab_pin.sym} 80 30 0 0 {name=p4 sig_type=std_logic lab=vout
+C {lab_pin.sym} 80 20 0 0 {name=p4 sig_type=std_logic lab=vout
 }
 C {vsource.sym} 280 -170 0 0 {name=V4 value= DC\{vss\} savecurrent=false}
 C {vsource.sym} 380 -170 0 0 {name=V5 value=DC\{vdd\} savecurrent=false}
@@ -69,7 +69,7 @@ value="
 .control
 tran 0.01u 100n
 setplot tran1
-plot v(va) v(vb) v(vout) + 1.2
+plot v(va) v(vb) + 1.2 v(vout) + 2.4
 set filetype = ascii
 write dcsweep.raw
 .endc
@@ -85,4 +85,4 @@ C {lab_pin.sym} -80 -10 0 0 {name=p12 sig_type=std_logic lab=va
 }
 C {lab_pin.sym} 380 -120 0 0 {name=p13 sig_type=std_logic lab=avss1p8
 }
-C {blocks/xorgate/schematic/xorgate.sym} 10 20 0 0 {name=x1}
+C {blocks/xorgate/schematic/xorgate.sym} -50 0 0 0 {name=x1}
